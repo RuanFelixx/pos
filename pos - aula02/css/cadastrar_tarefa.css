@@ -1,0 +1,51 @@
+*{
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.form{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    gap: 5px;
+    margin-top: 2rem;
+    border-radius: 2px;
+}
+
+.cadastrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 1rem;
+    border: none;
+}
+
+.botao_center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cadastrar:hover {
+    background-color: white;
+    color: green;
+}

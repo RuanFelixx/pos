@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+table {
+    width: 80%;
+    border-collapse: collapse; 
+    margin-top: 1rem; 
+}
+
+th, td {
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: center; 
+}
+
+th {
+    background-color:black; 
+    color: white;
+}
+
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.deletar{
+    background-color: rgb(255, 48, 48);
+    color: white;
+    text-decoration: none;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
