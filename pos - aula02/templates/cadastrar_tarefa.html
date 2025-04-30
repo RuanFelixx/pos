@@ -4,34 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Tarefa</title>
-    <link rel="stylesheet" href="../css/cadastrar_tarefa.css">
+    <link rel="stylesheet" href="/css/cadastrar_tarefa.css">
 </head>
 <body>
+
     <div class="container">
-
-        <form action="" class="form">
-
+        <form id="form-tarefa" class="form">
             <h2>Cadastre Sua Tarefa</h2>
-
-            <label for="">Descrição</label>
-            <input type="text" name="tar_escricao" id="tar_descricao">
-
-            <label for="">Prioridade</label>
-            <input type="number" name="tar_prioridade" id="tar_prioridade" min="1" max="10">
-
-            <label for="">Status</label>
-            <select name="" id="">
-                <option value="">Comfirmada</option>
-                <option value="">Negada</option>
+          
+            <label for="tar_descricao">Descrição</label>
+            <input type="text" name="descricao" id="tar_descricao" required>
+          
+            <label for="tar_prioridade">Prioridade</label>
+            <input type="number" name="prioridade" id="tar_prioridade" min="1" max="10" required>
+          
+            <label for="tar_status">Status</label>
+            <select name="concluida" id="tar_status">
+              <option value="false">Confirmada</option>
+              <option value="true">Negada</option>
             </select>
-
+          
             <div class="botao_center">
-                <button type="submit" class="cadastrar">Cadastrar</button>
+              <button type="submit" class="cadastrar">Cadastrar</button>
             </div>
-            
-
-        </form>
-
+          </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $('#form-tarefa').submit(function (e) {
+            e.preventDefault();
+
+            const tarefa = {
+                id: Date.now(),
+                descricao: $('#tar_descricao').val(),
+                prioridade: parseInt($('#tar_prioridade').val()),
+                concluida: $('#tar_status').val() === 'true'
+            };
+
+            $.ajax({
+                url: '/tarefas/',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(tarefa),
+                success: function () {
+                    alert('Tarefa cadastrada com sucesso!');
+                    $('#form-tarefa')[0].reset();
+                },
+                error: function () {
+                    alert('Erro ao cadastrar tarefa.');
+                }
+            });
+        });
+    </script>
+
+
 </body>
 </html>

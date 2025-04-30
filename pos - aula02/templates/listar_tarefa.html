@@ -2,11 +2,13 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/listar_tarefa.css">
+    <title>Listar Tarefas</title>
+    <link rel="stylesheet" href="/css/listar_tarefa.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+
+    <h2>Lista de Tarefas</h2>
 
     <table>
         <thead>
@@ -14,20 +16,64 @@
                 <th>Descrição</th>
                 <th>Prioridade</th>
                 <th>Status</th>
-                <th>opção</th>
+                <th>Opção</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <a href="" class="deletar">Deletar</a>
-                </td>
-            </tr>
+        <tbody id="tabela-tarefas">
+           
         </tbody>
     </table>
-    
+
+    <script>
+        function carregarTarefas() {
+            $('#tabela-tarefas').empty(); 
+
+            $.ajax({
+                url: '/tarefas/',
+                type: 'GET',
+                success: function(tarefas) {
+                    tarefas.forEach(function(tarefa) {
+                        const linha = `
+                            <tr data-id="${tarefa.id}">
+                                <td>${tarefa.descricao}</td>
+                                <td>${tarefa.prioridade}</td>
+                                <td>${tarefa.concluida ? 'Negada' : 'Confirmada'}</td>
+                                <td><a href="#" class="deletar">Deletar</a></td>
+                            </tr>
+                        `;
+                        $('#tabela-tarefas').append(linha);
+                    });
+                },
+                error: function() {
+                    alert('Erro ao carregar tarefas.');
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            carregarTarefas();
+        });
+
+        $(document).on('click', '.deletar', function(e) {
+            e.preventDefault();
+
+            const linha = $(this).closest('tr');
+            const id = linha.data('id');
+
+            if (confirm('Deseja realmente deletar esta tarefa?')) {
+                $.ajax({
+                    url: `/tarefas/${id}`,
+                    type: 'DELETE',
+                    success: function() {
+                        linha.remove(); 
+                    },
+                    error: function() {
+                        alert('Erro ao deletar tarefa.');
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>
