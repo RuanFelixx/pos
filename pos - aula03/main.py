@@ -29,7 +29,7 @@ def criar_usuario(usuario:Usuario):
 def excluir_usuario(usuario_id: int):
     for index, usuario in enumerate(usuarios):
         if usuario.id == usuario_id:
-            usuario_excluido = usuarios.pop(index) #ocorreu um erro no deçl, ai troquei para pop
+            usuario_excluido = usuarios.pop(index) #ocorreu um erro no del, ai troquei para pop
             return usuario_excluido
     raise HTTPException(status_code=404, detail="Usuário não localizado")
 
@@ -57,7 +57,7 @@ def listar_bibliotecas():
     return bibliotecas
 
 @app.post("/bibliotecas/", response_model=Biblioteca)
-def criar_biblioteca(biblioteca: Biblioteca):
+def criar_biblioteca(biblioteca: Biblioteca):                         
     biblioteca.id = len(bibliotecas) + 1
     bibliotecas.append(biblioteca)
     return biblioteca

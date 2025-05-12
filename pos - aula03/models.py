@@ -20,6 +20,7 @@ class Biblioteca(BaseModel):
     nome: str
     acervo: List[Livro]
     usuario: List[Usuario]
+    #emprestimo: List[Emprestimo]
 
 
 class Emprestimo(BaseModel):
